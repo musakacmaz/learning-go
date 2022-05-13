@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
 	conferenceName := "Golang Conference"
@@ -13,32 +16,40 @@ func main() {
 
 	var bookings []string
 
-	var firstName string
-	var lastName string
-	var email string
-	var userTickets uint
+	for {
+		var firstName string
+		var lastName string
+		var email string
+		var userTickets uint
 
-	// ask user for first name
-	fmt.Println("Enter your first name: ")
-	fmt.Scan(&firstName)
+		// ask user for first name
+		fmt.Println("Enter your first name: ")
+		fmt.Scan(&firstName)
 
-	// ask user for last name
-	fmt.Println("Enter your last name: ")
-	fmt.Scan(&lastName)
+		// ask user for last name
+		fmt.Println("Enter your last name: ")
+		fmt.Scan(&lastName)
 
-	// ask user for email
-	fmt.Println("Enter your email: ")
-	fmt.Scan(&email)
+		// ask user for email
+		fmt.Println("Enter your email: ")
+		fmt.Scan(&email)
 
-	// ask user for number of tickets
-	fmt.Println("How many tickets do you want to buy: ")
-	fmt.Scan(&userTickets)
+		// ask user for number of tickets
+		fmt.Println("How many tickets do you want to buy: ")
+		fmt.Scan(&userTickets)
 
-	remainingTickets = remainingTickets - userTickets
-	bookings = append(bookings, firstName+" "+lastName)
+		remainingTickets = remainingTickets - userTickets
+		bookings = append(bookings, firstName+" "+lastName)
 
-	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
-	fmt.Printf("We have %v tickets left for %v \n", remainingTickets, conferenceName)
+		fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
+		fmt.Printf("We have %v tickets left for %v \n", remainingTickets, conferenceName)
 
-	fmt.Printf("These are all our bookings: %v\n", bookings)
+		firstNames := []string{}
+		for _, booking := range bookings {
+			var names = strings.Fields(booking)
+			firstNames = append(firstNames, names[0])
+		}
+
+		fmt.Printf("The first names of bookings: %v\n", firstNames)
+	}
 }
